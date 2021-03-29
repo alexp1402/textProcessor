@@ -2,8 +2,8 @@ package com.textprocessor.textComponent;
 
 public enum ComponentType {
     TEXT(""),
-    //  LISTING(""),
-    PARAGRAPH("\\n"),
+    LISTING("(?<code>\\{code}.+?\\{code})"),
+    PARAGRAPH("(.*?)$\\n"),
     SENTENCE("[.!?]+"),
     WORD("\\s"),
     SYMBOL(""),

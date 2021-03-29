@@ -2,6 +2,9 @@ package com.textprocessor.parser;
 
 import com.textprocessor.textComponent.*;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class TextParser {
 
     public void paragraphParse(Component component){
@@ -25,6 +28,17 @@ public class TextParser {
             component.add(new WordComponent(component, p));
             System.out.println("WWWW->"+p);
         }
+    }
+
+    public String[] codeParse(String text){
+        String [] result = {""};
+        Pattern pattern = Pattern.compile(ComponentType.LISTING.getRegexp());
+        Matcher matcher = pattern.matcher(text);
+        int i=0;
+        while(matcher.find()){
+            result[i++] = matcher.group(1);
+        }
+        return result;
     }
 
 }
