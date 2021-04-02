@@ -1,12 +1,9 @@
 package com.textprocessor;
 
-import com.textprocessor.parser.Parser;
 import com.textprocessor.textComponent.Component;
 import com.textprocessor.textComponent.ComponentType;
 import com.textprocessor.textComponent.IComponent;
-import com.textprocessor.textComponent.ParseBuilder;
-
-import java.util.Iterator;
+import com.textprocessor.parser.ParseBuilder;
 
 public class App {
     public static void main(String[] args) {
@@ -26,13 +23,15 @@ public class App {
         IComponent rez = builder.listing().paragraph().sentence().wordPunctuation().word().letter().build();
 
 
-        for(IComponent c : rez.getEach(ComponentType.LETTER)){
-            System.out.println(ComponentType.LETTER+" ---\n"+c.getEntity());
-        }
+//        for(IComponent c : rez.getEach(ComponentType.LETTER)){
+//            System.out.println(ComponentType.LETTER+" ---\n"+c.getEntity());
+//        }
+//
 //        System.out.println("###############");
 //        for(IComponent c : rez.getEach(ComponentType.PUNCTUATION)){
 //            System.out.println(ComponentType.PUNCTUATION+" ---\n"+c.getEntity());
 //        }
 
+        System.out.println(main.collect());
     }
 }
