@@ -1,4 +1,4 @@
-import com.textprocessor.textComponent.ComponentType;
+import com.textprocessor.textComponent.TextComponentType;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Matcher;
@@ -18,7 +18,7 @@ public class ComponentTypeTest {
 
     @Test
     void regexpParagraphParseTest(){
-        Pattern p = Pattern.compile(ComponentType.LISTING.getRegexp(),Pattern.DOTALL);
+        Pattern p = Pattern.compile(TextComponentType.LISTING.getRegexp(),Pattern.DOTALL);
 
 
         Matcher m = p.matcher(text);

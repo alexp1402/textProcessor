@@ -1,64 +1,69 @@
 package com.textprocessor.parser;
 
-import com.textprocessor.textComponent.ComponentType;
-import com.textprocessor.textComponent.IComponent;
+import com.textprocessor.textComponent.TextComponentType;
+import com.textprocessor.textComponent.ITextComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ParseBuilder {
-    private IComponent component;
-    private Parser parser;
 
-    public ParseBuilder(IComponent component) {
+    private static final Logger LOG = LoggerFactory.getLogger(ParseBuilder.class);
+
+    private final ITextComponent component;
+    private final Parser parser;
+
+    public ParseBuilder(ITextComponent component) {
         this.component = component;
         parser = new Parser();
     }
 
     //for basic text Delimiter by TEXT and LISTING
     public ParseBuilder listing() {
-        parser.parseWithDelimiter(component, ComponentType.LISTING, ComponentType.TEXT);
+        parser.parseWithDelimiter(component, TextComponentType.LISTING, TextComponentType.TEXT);
         return this;
     }
 
     //for TEXT only Delimiter by PARAGRAPH and "PARAGRAPH DELIMIT"
     public ParseBuilder paragraph() {
-        for (IComponent comp : component.getEach(ComponentType.TEXT)) {
-            parser.parseWithDelimiter(comp, ComponentType.PARAGRAPH_DELIMITER, ComponentType.PARAGRAPH);
+        for (ITextComponent comp : component.getEach(TextComponentType.TEXT)) {
+            parser.parseWithDelimiter(comp, TextComponentType.PARAGRAPH_DELIMITER, TextComponentType.PARAGRAPH);
         }
         return this;
     }
 
     //for PARAGRAPH Delimiter by SENTENCE and "SENTENCE DELIMIT"
     public ParseBuilder sentence() {
-        for (IComponent comp : component.getEach(ComponentType.PARAGRAPH)) {
-            parser.parseWithDelimiter(comp, ComponentType.SENTENCE_DELIMITER, ComponentType.SENTENCE);
+        for (ITextComponent comp : component.getEach(TextComponentType.PARAGRAPH)) {
+            parser.parseWithDelimiter(comp, TextComponentType.SENTENCE_DELIMITER, TextComponentType.SENTENCE);
         }
         return this;
     }
 
     //for SENTENCE Delimiter by WORD_WITH_PUNCTUATION and SPACE
     public ParseBuilder wordPunctuation() {
-        for (IComponent comp : component.getEach(ComponentType.SENTENCE)) {
-            parser.parseWithDelimiter(comp, ComponentType.SPACE, ComponentType.WORD_WITH_PUNCTUATION);
+        for (ITextComponent comp : component.getEach(TextComponentType.SENTENCE)) {
+            parser.parseWithDelimiter(comp, TextComponentType.SPACE, TextComponentType.WORD_WITH_PUNCTUATION);
         }
         return this;
     }
 
     //for WORD_WITH_PUNCTUATION Delimiter by WORD and PUNCTUATION
     public ParseBuilder word() {
-        for (IComponent comp : component.getEach(ComponentType.WORD_WITH_PUNCTUATION)) {
-            parser.parseWithDelimiter(comp, ComponentType.PUNCTUATION, ComponentType.WORD);
+        for (ITextComponent comp : component.getEach(TextComponentType.WORD_WITH_PUNCTUATION)) {
+            parser.parseWithDelimiter(comp, TextComponentType.PUNCTUATION, TextComponentType.WORD);
         }
         return this;
     }
 
     //for WORD Delimiter by each LETTER
     public ParseBuilder letter() {
-        for (IComponent comp : component.getEach(ComponentType.WORD)) {
-            parser.parse(comp, ComponentType.LETTER);
+        for (ITextComponent comp : component.getEach(TextComponentType.WORD)) {
+            parser.parse(comp, TextComponentType.LETTER);
         }
         return this;
     }
 
-    public IComponent build() {
+    public ITextComponent build() {
         return component;
     }
 

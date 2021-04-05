@@ -1,6 +1,6 @@
 package com.textprocessor.textComponent;
 
-public enum ComponentType {
+public enum TextComponentType {
     MAIN(""),
     TEXT(""),
     LISTING("(?<code>\\{code}.+?\\{\\/code})"),
@@ -17,7 +17,7 @@ public enum ComponentType {
 
     private final String regexp;
 
-    ComponentType(String regexp) {
+    TextComponentType(String regexp) {
         this.regexp = regexp;
     }
 

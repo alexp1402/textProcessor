@@ -1,8 +1,8 @@
 package com.textprocessor;
 
-import com.textprocessor.textComponent.Component;
-import com.textprocessor.textComponent.ComponentType;
-import com.textprocessor.textComponent.IComponent;
+import com.textprocessor.textComponent.TextComponent;
+import com.textprocessor.textComponent.TextComponentType;
+import com.textprocessor.textComponent.ITextComponent;
 import com.textprocessor.parser.ParseBuilder;
 
 public class App {
@@ -18,9 +18,9 @@ public class App {
                 "\n" +
                 "Метод boolean find() ищет очередное совпадение в тексте с шаблоном. С помощью этого метода и оператора цикла можно производить анализ всего текста по событийной модели (осуществлять необходимые операции при наступлении события";
 
-        IComponent main = new Component(ComponentType.MAIN,text,null);
+        ITextComponent main = new TextComponent(TextComponentType.MAIN,text,null);
         ParseBuilder builder = new ParseBuilder(main);
-        IComponent rez = builder.listing().paragraph().sentence().wordPunctuation().word().letter().build();
+        ITextComponent rez = builder.listing().paragraph().sentence().wordPunctuation().word().letter().build();
 
 
 //        for(IComponent c : rez.getEach(ComponentType.LETTER)){
