@@ -9,10 +9,10 @@ public enum TextComponentType {
     SENTENCE(""),
     SENTENCE_DELIMITER("[.!?]+\\s*"),
     WORD_WITH_PUNCTUATION(""),
-    SPACE("\\s+"),
+    WORD_DELIMITER("\\s+"),
     WORD(""),
     PUNCTUATION("[,-:“;»«)(]"),
-    LETTER("(.{1})");
+    SYMBOL("(.{1})");
 
 
     private final String regexp;

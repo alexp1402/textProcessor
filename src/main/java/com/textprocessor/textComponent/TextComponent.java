@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 
-public class TextComponent implements ITextComponent {
+public class TextComponent implements ITextComponent{
+
 
     private static final Logger LOG = LoggerFactory.getLogger(ITextComponent.class);
 
@@ -20,35 +21,32 @@ public class TextComponent implements ITextComponent {
         this.type = TextComponentType.MAIN;
         this.text = text;
         this.parent = null;
-        LOG.info("Creating new MAIN TextComponent Type={} Entity={} ParentType=null(root)",type,text);
+        LOG.info("Creating new MAIN TextComponent \n\n{} ",text);
     }
 
     //components during parsing
     public TextComponent(TextComponentType type, String text, ITextComponent parent) {
-        if (type==null){
-            LOG.error("Component type can't be NULL Use TextComponent class directly");
-            throw new IllegalArgumentException();
+        if (type==null||text==null||parent==null){
+            LOG.error("You try to create new TextComponent with NULL parameter Use TextComponent class directly");
+            throw new IllegalArgumentException("You try to create new TextComponent with NULL parameter Use TextComponent class directly");
         }
         this.type = type;
         this.text = text;
         this.parent = parent;
         //Ask Max for BestPractice for such
-        if ((parent != null)) {
-            LOG.info("Creating new MAIN TextComponent Type={} Entity={} ParentType=null(root)", type, text);
-        } else {
-            LOG.info("Creating new TextComponent Type={} Entity={} ParentType={}", type, text, parent.getType());
-        }
+
+        LOG.info("Creating new TextComponent \n TYPE={} \n ENTITY={} \n PARENT_TYPE={}", type, text, parent.getType());
     }
 
     @Override
     public void add(ITextComponent component) {
         childes.add(component);
-        LOG.info("Adding to {} new child component type={} entity={}",this.type,component.getType(),component.getEntity());
+        LOG.info("Adding to {} new child component TYPE={} \n ENTITY={}",this.type,component.getType(),component.getEntity());
     }
 
     @Override
     public boolean remove(ITextComponent component) {
-        LOG.info("Remove from {} child component type={} entity={}",this.type,component.getType(),component.getEntity());
+        LOG.info("Remove from {} child component TYPE={} ENTITY={}",this.type,component.getType(),component.getEntity());
         return childes.remove(component);
     }
 
@@ -125,8 +123,9 @@ public class TextComponent implements ITextComponent {
 
     @Override
     public boolean equals(Object obj) {
-        //Compare ONLY entity (need for exercise)
+        //Compare ONLY entity (need for exercises HashMap)
         //NO type, NO parent field comparing
         return text.equalsIgnoreCase(((ITextComponent)obj).getEntity().toLowerCase());
     }
+
 }
